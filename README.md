@@ -329,6 +329,14 @@ Note that dotdrop uses different delimiters than
 * comment start = `{#@@`
 * comment end = `@@#}`
 
+# Avilaible variales:
+* profile: current profile
+* udata['os']: value of uname -s (Linux on a machine running linux kernel)
+* udata['host'] = value of uname -n (usually, the hostname)
+* udata['arch'] = value of uname -m (x86_64 on an amd64)
+* udata['login'] = user login
+* udata['env'] = a dict with env variables and their values.  Ex: udata['env']['USER'] is current login
+
 # Example
 
 Let's consider two hosts:
