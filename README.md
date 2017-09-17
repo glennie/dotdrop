@@ -331,6 +331,7 @@ Note that dotdrop uses different delimiters than
 
 # Avilaible variales:
 * profile: current profile
+* udata['src']: source file used for template creation
 * udata['os']: value of uname -s (Linux on a machine running linux kernel)
 * udata['host'] = value of uname -n (usually, the hostname)
 * udata['arch'] = value of uname -m (x86_64 on an amd64)

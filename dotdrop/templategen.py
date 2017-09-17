@@ -32,8 +32,9 @@ class Templategen:
                                comment_start_string=COMMENT_START,
                                comment_end_string=COMMENT_END)
 
-    def _template_data(self):
+    def _template_data(self, src=''):
         udata = {}
+        udata['src'] = src
         udata['os'] = os.uname()[0]
         udata['host'] = os.uname()[1]
         udata['arch'] = os.uname()[4]
@@ -62,7 +63,7 @@ class Templategen:
             data = self._read_bad_encoded_text(src)
             template = self.env.from_string(data)
 
-        content = template.render(profile=profile,udata=self._template_data())
+        content = template.render(profile=profile,udata=self._template_data(src=src))
         content = content.encode('UTF-8')
         return content
 
