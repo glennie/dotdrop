@@ -35,7 +35,8 @@ class Installer:
 
     def link(self, src, dst):
         '''Sets src as the link target of dst'''
-        src = os.path.join(self.base, os.path.expanduser(src))
+        # Test GV
+        src = os.path.join(self.base, os.path.expandvars(os.path.expanduser(src)))
         dst = os.path.join(self.base, os.path.expanduser(dst))
         if os.path.exists(dst):
             if os.path.realpath(dst) == os.path.realpath(src):

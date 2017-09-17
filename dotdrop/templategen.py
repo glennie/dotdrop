@@ -18,6 +18,7 @@ COMMENT_END = '@@#}'
 
 class Templategen:
 
+
     def __init__(self, base='.'):
         self.base = base
         loader = FileSystemLoader(self.base)
@@ -31,6 +32,14 @@ class Templategen:
                                comment_start_string=COMMENT_START,
                                comment_end_string=COMMENT_END)
 
+    def _template_data(self):
+        udata = {}
+        udata['os'] = os.uname()[0]
+        udata['host'] = os.uname()[1]
+        udata['arch'] = os.uname()[4]
+        udata['login'] = os.getlogin()
+        udata['env'] = os.environ
+        return udata
     def generate(self, src, profile):
         if not os.path.exists(src):
             return ''
@@ -48,12 +57,12 @@ class Templategen:
         length = len(self.base) + 1
         try:
             template = self.env.get_template(src[length:])
-            content = template.render(profile=profile)
+            content = template.render(profile=profile, udata=self._template_data())
         except UnicodeDecodeError:
             data = self._read_bad_encoded_text(src)
             template = self.env.from_string(data)
 
-        content = template.render(profile=profile)
+        content = template.render(profile=profile,udata=self._template_data())
         content = content.encode('UTF-8')
         return content
 
